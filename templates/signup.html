@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login & Registration Form</title>
+  <!---Custom CSS File--->
+  <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="registration form">
+      <header>Signup</header>
+      <form action="#">
+        <input name="first_name"  type="text" placeholder="First Name">
+        <input name="last_name"  type="text" placeholder="Last Name">
+        <input name="username"  type="text" placeholder="Username">
+        <input name="email"  type="text" placeholder="Email">
+        <input name="password"  type="password" placeholder="Create a password">
+        <input name=""  type="button" class="button" value="Signup">
+      </form>
+      <div class="signup">
+        <span class="signup">Already have an account?
+         <!-- <label for="check">Login</label> -->
+         <a href="{% url 'login' %}">Login</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
