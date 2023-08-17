@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homepage</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    
+</head>
+<body>
+
+    <nav>
+
+        <div class="heading">
+  
+          <h4>Daydream Library</h4>
+  
+        </div>
+  
+        <ul class="nav-links">
+  
+          <li><a class="active" href="{% url 'books' %}">Home</a></li>
+  
+          <li><a href="{% url 'books' %}">BooksIssued</a></li>
+          <!-- <li><a href="pages/about.html">Genre</a></li>
+         -->
+        <div class="dropdown">
+            <li><a href="index.html">Genre</a></li>
+            <!-- <button class="dropbtn">Genre</button> -->
+            <div class="dropdown-content">
+            <a href="#">Action</a>
+            <a href="#">Horror</a>
+            <a href="#">Thriller</a>
+            </div>
+        </div>
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+          <li><a href="{% url 'signup' %}">Signup</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+        
+    <div id="large-th">
+        <div class="container">
+          <!-- <h1> All Books</h1> -->
+          <br>
+          <!-- <div class="choose">
+            <a href="#list-th"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+            <a href="#large-th"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+          </div> -->
+          <div id="list-th">
+            {% for _ in "123456789123" %}
+            <div class="book text-center read">
+              <div class="cover">
+                <img src="https://s-media-cache-ak0.pinimg.com/564x/f9/8e/2d/f98e2d661445620266c0855d418aab71.jpg">
+              </div>
+              <div class="description">
+                <p class="title">Frankenstein<br>
+                  <span class="author">Mary Shelley</span></p>
+              </div>
+              <div class="other"> 
+                <p>Copies: 5</p>
+                <p>Available: yes</p>
+              </div>
+              <button class="button">Assign Book</button>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+            
+      <script>
+        // JavaScript to add the 'active' class to the clicked <li>
+        const listItems = document.querySelectorAll('li');
+        
+        listItems.forEach(item => {
+          item.addEventListener('click', () => {
+            alert('777')
+            // Remove 'active' class from all items
+            listItems.forEach(li => li.querySelector('a'));
+            // Add 'active' class to the clicked <a> element
+            item.querySelector('a').classList.add('active');
+          });
+        });
+        </script>   
+      
+</body>
+</html>

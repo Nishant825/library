@@ -1,0 +1,260 @@
+body{
+    background-color:azure;
+}
+
+.container {
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .choose {
+    width: 100%;
+    height: 40px;
+  }
+  .fa {
+    margin-right: 20px;
+    font-size: 30px;
+    color: gray;
+    float: right;
+  }
+  /******************************************
+  Book stuff
+  *******************************************/
+  
+  .book {
+    display: inline-block;
+    width: 230px;
+    height: 530px;
+    box-shadow: 0 0 20px #aaa;
+    margin: 25px;
+    padding: 10px 10px 0 10px;
+    vertical-align: top;
+    transition: height 1s;
+  }
+  /* star button */
+  .book:after {
+    font-family: FontAwesome;
+    content: "\f006";
+    font-size: 35px;
+    position: relative;
+    left: -.1cm;
+    top: -1.6cm;
+    float: right;
+  }
+  
+  .cover {
+    border: 2px solid gray;
+    height: 300px;
+    overflow: hidden;
+  }
+  
+  .cover img {
+    width: 100%;
+  }
+  
+  .book p {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  
+  .other p{
+    margin: 8px 0px;
+    font-size: 18px;
+  }
+  .book .author {
+    font-size: 15px;
+  }
+  /* @media (max-width: 941px) {
+    .container {
+      max-width: 700px;
+    }
+    .book {
+      margin: 49px;
+    }
+  } */
+  /* @media (max-width: 730px) {
+    .book {
+      display: block;
+      margin: 0 auto;
+      margin-top: 50px;
+    }
+    
+  } */
+  
+  /*********************************
+  other
+  **********************************/
+  
+  h1 {
+    color: gray;
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: -3px;
+  }
+  
+  /**********************************
+  display change
+  ***********************************/
+  /*book height smaller, cover opacity, move text onto cover and star too
+  animate it */
+  #list-th{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  
+  #list-th:target .book {
+    height: 100px;
+    width: 250px;
+    padding: 10px;
+    margin: 25px auto 25px auto;
+  }
+  
+  #list-th:target .cover {
+    width: 246px;
+  }
+  
+  #list-th:target img {
+    opacity: .1;
+  }
+  
+  #list-th:target p {
+    margin-top: -62px;
+    margin-left: 20px;
+  }
+  /* remove button? */
+  #large-th:target .book {
+    height: 390px;
+  }
+  
+
+nav {
+
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+
+  align-items: center;
+
+  min-height: 8vh;
+
+  background-color: teal;
+
+  font-family: "Montserrat", sans-serif;
+
+}
+
+
+.heading {
+
+    color: white;
+  
+    text-transform: uppercase;
+  
+    letter-spacing: 10px;
+  
+    font-size: 20px;
+  
+  }
+  
+  .nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+  
+  }
+  
+  .nav-links li {
+    justify-content: space-around;
+    list-style: none;
+  
+  }
+  
+  .nav-links a {
+  
+    color: white;
+  
+    text-decoration: none;
+  
+    letter-spacing: 3px;
+  
+    font-weight: bold;
+  
+    font-size: 14px;
+  
+    padding: 14px 16px;
+    margin: 2px;
+  
+  }
+  
+  /* .nav-links a{
+  
+    background-color: lightseagreen;
+  
+  } */
+  
+
+  .nav-links li a.active {
+  
+    background-color: #4caf50;
+  
+  }
+
+  /* .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  } */
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+  }
+
+
+
+  .button {
+    background-color: #008CBA; /* Blue */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+    margin-left: 35px;
+    margin-top: inherit;
+  }
+
