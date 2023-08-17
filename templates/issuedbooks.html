@@ -1,65 +1,8 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'css/books.css' %}">
-</head>
-<body>
-    <nav>
 
-        <div class="heading">
-  
-          <h4>Daydream Library</h4>
-  
-        </div>
-  
-        <ul class="nav-links">
-  
-          <li><a class="active" href="{% url 'home' %}">Home</a></li>
-  
-          <li><a href="{% url 'books' %}">BooksIssued</a></li>
-          <!-- <li><a href="pages/about.html">Genre</a></li>
-         -->
-        <div class="dropdown">
-            <li><a href="index.html">Genre</a></li>
-            <!-- <button class="dropbtn">Genre</button> -->
-            <div class="dropdown-content">
-            <a href="#">Action</a>
-            <a href="#">Horror</a>
-            <a href="#">Thriller</a>
-            </div>
-        </div>
-          {% if request.user.is_authenticated %}
-          <li><a href="{% url 'logout' %}">Logout</a></li>
-          {% else %}
-          <li><a href="{% url 'login' %}">Login</a></li>
-          <li><a href="{% url 'signup' %}">Signup</a></li>
-          {% endif %}
-        </ul>
-      </nav>
-        
-    <div class="items">
+{% block content %}
+<div class="items">
 
-    </div>
-
-
-          
-    <script>
-        // JavaScript to add the 'active' class to the clicked <li>
-        const listItems = document.querySelectorAll('li');
-        
-        listItems.forEach(item => {
-          item.addEventListener('click', () => {
-            // Remove 'active' class from all items
-            listItems.forEach(li => li.querySelector('a').classList.remove('active'));
-            // Add 'active' class to the clicked <a> element
-            item.querySelector('a').classList.add('active');
-          });
-        });
-        </script>  
-</body>
-</html>
+</div>
+{% endblock %}
