@@ -25,20 +25,22 @@
 
     <ul class="nav-links">
 
-      <li><a class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a></li>
+      <li><a class="{% block urlHomeActive %}{% endblock urlHomeActive %}" href="{% url 'home' %}">Home</a></li>
 
-      <li><a class="{% if request.resolver_match.url_name == 'books' %}active{% endif %}" href="{% url 'books' %}">BooksIssued</a></li>
+      <li><a class="{% block urlBookActive %}{% endblock urlBookActive %}" href="{% url 'books' %}">BooksIssued</a></li>
       <!-- <li><a href="pages/about.html">Genre</a></li>
          -->
+      <!-- <li>Genre</li> -->
       <div class="dropdown">
-        <li><a href="index.html">Genre</a></li>
+        <li><a href="javascript:void(0);">Genre</a></li>
         <!-- <button class="dropbtn">Genre</button> -->
         <div class="dropdown-content">
-          <a href="#">Action</a>
-          <a href="#">Horror</a>
-          <a href="#">Thriller</a>
+          <a href="/action" class="filter-books" data-filter="action">Action</a>
+          <a href="/horror" class="filter-books" data-filter="horror">Horror</a>
+          <a href="/thriller" class="filter-books" data-filter="thriller">Thriller</a>
         </div>
       </div>
+      {% csrf_token %}
       {% if request.user.is_authenticated %}
       <li><a href="{% url 'logout' %}">Logout</a></li>
       {% else %}
@@ -46,12 +48,16 @@
       <li><a href="{% url 'signup' %}">Signup</a></li>
       {% endif %}
     </ul>
-</nav>
-{% block content %}
+    {% if request.user.is_authenticated %}
+    <div class="avatar">
+      <span class="avatar-letter">{{ request.user.username|first|upper }}</span>
+    </div>
+    {% endif %}
+  </nav>
 
-{% endblock %}
-  
-<!-- <script>
+  {% block content %}{% endblock %}
+
+  <!-- <script>
     // JavaScript to add the 'active' class to the clicked <li>
     const listItems = document.querySelectorAll('li');
     
@@ -64,8 +70,59 @@
       });
     });
     </script>    -->
- 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- <script>
+      $(document).ready(function() {
+    $('.filter-books').click(function(e) {
+        e.preventDefault(); // Prevent the default link behavior
 
+        var filterBy = $(this).data('filter');
+        var currentUrl = window.location.href;
+
+        // Remove any existing parameter
+        var baseUrl = currentUrl.split('/',-1);
+        console.log(baseUrl,"777")
+        var newUrl = baseUrl + filterBy;
+
+        // Update the URL without a page refresh
+        history.pushState(null, null, newUrl);
+
+        // Perform any additional filtering or UI updates here
+        // ...
+
+        // You might also trigger an AJAX call to update content based on the filter
+        // ...
+    });
+});
+    </script> -->
+
+  <script>
+    $(document).ready(function() {
+      const modal = $(".modal");
+      const trigger = $(".trigger");
+      const closeButton = $(".close-button");
+      $(trigger).click(function () {
+        let book_title = $(this).parent('div').find('.title').text();
+        console.log(book_title)
+        // $('#book-ttl').text(book_title);
+        modal.find("h3").text(book_title)
+        toggleModal();
+      });
+        function toggleModal() {
+            modal.toggleClass("show-modal");
+        }
+
+        // function windowOnClick(event) {
+        //     if (event.target === modal[0]) {
+        //         toggleModal();
+        //     }
+        // }
+        // trigger.on("click", toggleModal);
+        // console.log(trigger)
+        closeButton.on("click", toggleModal);
+        // $(window).on("click", windowOnClick);
+    });
+  </script>
 </body>
 
 </html>

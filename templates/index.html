@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block urlHomeActive %}active{% endblock urlHomeActive %}
 {% block content %}
 <div id="large-th">
   <div class="container">
@@ -11,21 +11,34 @@
           <a href="#large-th"><i class="fa fa-th-large" aria-hidden="true"></i></a>
         </div> -->
     <div id="list-th">
-      {% for _ in "123456789123" %}
+      {% for book in books %}
       <div class="book read">
         <div class="cover">
-          <img src="https://s-media-cache-ak0.pinimg.com/564x/f9/8e/2d/f98e2d661445620266c0855d418aab71.jpg">
+          <img src="{{book.cover_img.url}}">
         </div>
         <div class="description">
-          <p class="title">Frankenstein<br>
-            <span class="author">Mary Shelley</span>
+          <p class="title">{{book.title}}<br>
           </p>
+          <!-- <p class="author">{{book.author}}</p> -->
+          <div class="author">
+            <span class="author">{{book.author}}</span>
+          </div>
+          
         </div>
         <div class="other">
           <p>Copies: 5</p>
           <p>Available: yes</p>
         </div>
-        <button class="button">Assign Book</button>
+        <button class="button trigger">Assign Book</button>
+        <div class="modal">
+          <div class="modal-content">
+              <span class="close-button">&times;</span>
+              <span>Book:</span> <h3 id="book-ttl"></h3>
+              <input type="text" placeholder="enter member name">
+              <input type="date">
+              <input type="button" value="Sub">
+          </div>
+      </div>
       </div>
       {% endfor %}
     </div>
