@@ -18,12 +18,18 @@ class Genre(models.Model):
         return self.name
 
 
+STOCK_CHOICES = (
+        ('yes', 'Yes'),
+        ('no', 'No'),
+    )
+
 class Book(models.Model):
     cover_img = models.ImageField(upload_to='images')
     title = models.CharField(max_length=100)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True)
-
+    availability_status = models.CharField(max_length=3, choices=STOCK_CHOICES, default='yes')
+ 
 
     def __str__(self):
         return self.title

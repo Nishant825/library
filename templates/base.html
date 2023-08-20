@@ -8,6 +8,8 @@
   <title>homepage</title>
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
   <link rel="stylesheet" href="{% static 'css/books.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'images/favicon/favicon.ico' %}">
+
 
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
 
@@ -97,7 +99,7 @@
     </script> -->
 
   <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
       const modal = $(".modal");
       const trigger = $(".trigger");
       const closeButton = $(".close-button");
@@ -105,22 +107,22 @@
         let book_title = $(this).parent('div').find('.title').text();
         console.log(book_title)
         // $('#book-ttl').text(book_title);
-        modal.find("h3").text(book_title)
+        modal.find("h2").text(book_title)
         toggleModal();
       });
-        function toggleModal() {
-            modal.toggleClass("show-modal");
-        }
+      function toggleModal() {
+        modal.toggleClass("show-modal");
+      }
 
-        // function windowOnClick(event) {
-        //     if (event.target === modal[0]) {
-        //         toggleModal();
-        //     }
-        // }
-        // trigger.on("click", toggleModal);
-        // console.log(trigger)
-        closeButton.on("click", toggleModal);
-        // $(window).on("click", windowOnClick);
+      // function windowOnClick(event) {
+      //     if (event.target === modal[0]) {
+      //         toggleModal();
+      //     }
+      // }
+      // trigger.on("click", toggleModal);
+      // console.log(trigger)
+      closeButton.on("click", toggleModal);
+      // $(window).on("click", windowOnClick);
     });
   </script>
 </body>
