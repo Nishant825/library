@@ -58,73 +58,32 @@
   </nav>
 
   {% block content %}{% endblock %}
-
-  <!-- <script>
-    // JavaScript to add the 'active' class to the clicked <li>
-    const listItems = document.querySelectorAll('li');
-    
-    listItems.forEach(item => {
-      item.addEventListener('click', () => {
-        // Remove 'active' class from all items
-        listItems.forEach(li => li.querySelector('a'));
-        // Add 'active' class to the clicked <a> element
-        item.querySelector('a').classList.add('active');
-      });
-    });
-    </script>    -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
   <!-- <script>
-      $(document).ready(function() {
-    $('.filter-books').click(function(e) {
-        e.preventDefault(); // Prevent the default link behavior
-
-        var filterBy = $(this).data('filter');
-        var currentUrl = window.location.href;
-
-        // Remove any existing parameter
-        var baseUrl = currentUrl.split('/',-1);
-        console.log(baseUrl,"777")
-        var newUrl = baseUrl + filterBy;
-
-        // Update the URL without a page refresh
-        history.pushState(null, null, newUrl);
-
-        // Perform any additional filtering or UI updates here
-        // ...
-
-        // You might also trigger an AJAX call to update content based on the filter
-        // ...
-    });
-});
-    </script> -->
-
-  <script>
     $(document).ready(function () {
-      const modal = $(".modal");
-      const trigger = $(".trigger");
-      const closeButton = $(".close-button");
-      $(trigger).click(function () {
-        let book_title = $(this).parent('div').find('.title').text();
-        console.log(book_title)
-        // $('#book-ttl').text(book_title);
-        modal.find("h2").text(book_title)
-        toggleModal();
+        $(document).on('keyup', '#search_data', function () {
+          let self = this;
+          const userInput = $(this).val().toLowerCase();
+          console.log(userInput, "899")
+          if (userInput.length > 1) {
+            $.ajax({
+              type: 'GET',
+              url: "{% url 'search_user' %}",
+              data: { "user_name": userInput },
+              success: function (response) {
+                if (response.status = true) {
+                  $(self).next('div').css('display', 'unset');
+                  console.log("99")
+                } else {
+                  console.log("no data found")
+                }
+              }
+            });
+          }
+        });
       });
-      function toggleModal() {
-        modal.toggleClass("show-modal");
-      }
-
-      // function windowOnClick(event) {
-      //     if (event.target === modal[0]) {
-      //         toggleModal();
-      //     }
-      // }
-      // trigger.on("click", toggleModal);
-      // console.log(trigger)
-      closeButton.on("click", toggleModal);
-      // $(window).on("click", windowOnClick);
-    });
-  </script>
+  </script> -->
 </body>
 
 </html>

@@ -23,32 +23,17 @@
           <div class="author">
             <span class="author">{{book.author}}</span>
           </div>
-          
         </div>
         <div class="other">
           <p>Available: {{book.availability_status}}</p>
         </div>
-        <button class="button trigger">Assign Book</button>
-        <div class="modal">
-          <div class="modal-content">
-              <span class="close-button">&times;</span><br>
-              <h2 id="book-ttl"></h2>
-              <form action="">
-              <label for="member">Member Name</label>
-              <input type="text" placeholder="enter member name">
-              <label for="">Return Date</label>
-              <input type="date">
-              <input class="modal-btn" type="button" value="Submit">
-              </form>
-              
-          </div>
-      </div>
+        <a href="{% url 'assign_book' %}" class="assign trigger">Assign Book</a>
       </div>
       {% endfor %}
     </div>
   </div>
 </div>
-{% endblock %} 
+{% endblock %}
 
 </body>
 
