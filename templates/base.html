@@ -8,6 +8,8 @@
   <title>homepage</title>
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
   <link rel="stylesheet" href="{% static 'css/books.css' %}">
+  <link rel="stylesheet" href="{% static 'css/book_issued.css' %}">
+
   <link rel="icon" type="image/x-icon" href="{% static 'images/favicon/favicon.ico' %}">
 
 
@@ -29,7 +31,7 @@
 
       <li><a class="{% block urlHomeActive %}{% endblock urlHomeActive %}" href="{% url 'home' %}">Home</a></li>
 
-      <li><a class="{% block urlBookActive %}{% endblock urlBookActive %}" href="{% url 'books' %}">BooksIssued</a></li>
+      <li><a class="{% block urlBookActive %}{% endblock urlBookActive %}" href="{% url 'issued_books' %}">BooksIssued</a></li>
       <!-- <li><a href="pages/about.html">Genre</a></li>
          -->
       <!-- <li>Genre</li> -->
@@ -59,31 +61,59 @@
 
   {% block content %}{% endblock %}
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  
-  <!-- <script>
-    $(document).ready(function () {
-        $(document).on('keyup', '#search_data', function () {
-          let self = this;
-          const userInput = $(this).val().toLowerCase();
-          console.log(userInput, "899")
-          if (userInput.length > 1) {
-            $.ajax({
-              type: 'GET',
-              url: "{% url 'search_user' %}",
-              data: { "user_name": userInput },
-              success: function (response) {
-                if (response.status = true) {
-                  $(self).next('div').css('display', 'unset');
-                  console.log("99")
-                } else {
-                  console.log("no data found")
-                }
-              }
-            });
-          }
+  <script>
+    let book_list_obj = {{ user_list_obj | safe}}
+    $(document).on('keyup', '.list_value', function () {
+      let value = $(this).val();
+      // var myArray = value.split(";");
+      // text_to_search = myArray.pop(-1).trim()
+      console.log(book_list_obj)
+      if (value.length > 2) {
+        var findsearch = book_list_obj.filter(function (book_list_obj) {
+          return (book_list_obj.toLowerCase()).includes(value.toLowerCase());
+          console.log(findsearch)
         });
-      });
-  </script> -->
+
+
+        let html = '';
+
+        if (findsearch.length > 0) {
+          for (let i = 0; i < findsearch.length; i++) {
+
+            html += `<li class="bg-light list_li_type" id="1" data-value="${findsearch[i]}"
+            data-desc="${findsearch[i]}"
+            style="cursor:pointer;">${findsearch[i]}</li>`;
+
+          }
+          $("#suggestions").html(html);
+          $("#suggestions").css("display", "block");
+
+        }
+
+      }
+      else {
+        $("#suggestions").css("display", "none");
+      }
+    })
+    var input_field_value = []
+    $(document).on('click', '.list_li_type', function () {
+      let value = $(this).text();
+      input_field_value.push(value)
+      $(".list_value").val(input_field_value.join(''));
+      $("#suggestions").css("display", "none");
+    });
+
+
+    $("#return_book").change(function() {
+        var selectedValue = $(this).val();
+        console.log(selectedValue)
+        if (selectedValue === "no") {
+            $(this).css("background-color", "red");
+        } else {
+            $(this).css("background-color", "green");
+        }
+    });
+  </script>
 </body>
 
 </html>

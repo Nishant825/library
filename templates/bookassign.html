@@ -1,16 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block urlBookActive %}active{% endblock urlBookActive %}
+
 {% block content %}
 <div class="book-container">
     <div class="book_wrap">
         <div class="cover_img">
+            <img src="{{books.cover_img.url}}" alt="">
         </div>
-
+        <div class="form_container">
+            <form action="">
+                <span class="text_label book_ttl" >Book Name: </span><span class="text_label">{{books.title}}</span><br>
+                <span class="text_label author_ttl">Author Name: </span><span class="text_label">{{books.author}}</span><br><br><br>
+                <span class="text_label"> Member Name</span>
+                <input class="list_value" type="text"><br>
+                <div class="suggestions" id="suggestions">
+                </div>
+                <span class="text_label"> Return Date</span>
+                <input type="date"><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
         
-        <form action="">
-        
-        </form>
     </div>
 </div>
 {% endblock %}

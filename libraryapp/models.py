@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 
 class Author(models.Model):
@@ -33,3 +33,13 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class BookBorrow(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    due_date = models.DateField(null=True)
+    return_date = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return self.book.title

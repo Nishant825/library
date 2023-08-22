@@ -1,0 +1,77 @@
+/* Reset some default browser styling for tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 50px;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Style the header row */
+th {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+}
+
+td {
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+}
+/* Apply alternating background color to rows */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Highlight on hover */
+/* tr:hover {
+    background-color: #ddd;
+} */
+
+td img{
+    width: 50px;
+    height: 50px;
+}
+
+
+
+/* Reset default browser styling for select elements */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 16px;
+    width: 85px;
+    text-align: center;
+    background-color: #bf2020;
+    color: white;
+}
+
+/* Style the select container */
+.custom-select {
+    border-radius: 4px;
+    background-color: #f2f2f2;
+}
+
+/* Style the select options */
+select option {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Apply styles when the select is focused */
+select:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+}

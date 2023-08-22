@@ -2,7 +2,40 @@
 {% load static %}
 {% block urlBookActive %}active{% endblock urlBookActive %}
 {% block content %}
-<div class="items">
 
+<table class="custom-table">
+    <tr>
+        <th>Book Image</th>
+        <th>Book Title</th>
+        <th>Due Date</th>
+        <th>User</th>
+        <th>Returned</th>
+        <th>Fine(INR)</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td><img src="{{book.book.cover_img.url}}" alt=""></td>
+        <td>{{book.book.title}}</td>
+        <td>{{book.due_date}}</td>
+        <td>{{book.user.username}}</td>
+        <td><select name="return" id="return_book">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select></td>
+        <td>0</td>
+    </tr>
+    {% endfor %}
+    <!-- Add more rows as needed -->
+</table>
+
+<!-- {% for book in books %}
+<div class="items_container">
+    <img src="{{book.book.cover_img.url}}" alt="">
+    <span>{{book.book.title}}</span>
+    <span>{{book.book.title}}</span>
+    <span>Due Date</span>
+    <span>Returd Date</span>
+    <span>Fine</span>
 </div>
+{% endfor %} -->
 {% endblock %}
