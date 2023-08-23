@@ -39,10 +39,13 @@ td img{
     height: 50px;
 }
 
-
-
-/* Reset default browser styling for select elements */
-select {
+td .return-btn {
+    white-space: nowrap; 
+    text-align: center;
+    width: 100px;
+}
+/* Reset default browser styling for select elements
+/* select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -58,20 +61,45 @@ select {
 }
 
 /* Style the select container */
-.custom-select {
+/* .custom-select {
     border-radius: 4px;
     background-color: #f2f2f2;
 }
 
 /* Style the select options */
-select option {
+/* select option {
     background-color: #fff;
     color: #333;
-}
+} */
 
 /* Apply styles when the select is focused */
-select:focus {
+/* select:focus {
     outline: none;
     border-color: #66afe9;
     box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+}  */
+/* 
+input[type="checkbox"] {
+    transform: scale(1.2);
+}  */
+
+
+td input[type="button"]{
+        color: white;
+        background-color: #dd4343;
+        text-decoration: none;
+        letter-spacing: 3px;
+        font-weight: bold;
+        font-size: 14px;
+        margin: 2px;
+        border: none;
+        padding: 8px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: inherit;
 }
+

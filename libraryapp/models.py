@@ -41,5 +41,11 @@ class BookBorrow(models.Model):
     due_date = models.DateField(null=True)
     return_date = models.DateField(null=True, blank=True)
 
+    def calculate_due_date(self):
+        if self.return_date and self.due_date:
+            if  (self.return_date - self.due_date).days > 0:
+                return True
+        return False
+
     def __str__(self):
         return self.book.title
