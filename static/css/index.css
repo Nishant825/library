@@ -208,12 +208,14 @@ nav {
 
 .assign{
   color: white;
+  user-select: none;
   background-color: #008CBA;
   text-decoration: none;
   letter-spacing: 3px;
   font-weight: bold;
   font-size: 14px;
   /* padding: 14px 16px; */
+  font-family: "Montserrat", sans-serif;
   margin: 2px;
 
   border: none;

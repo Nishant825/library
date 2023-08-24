@@ -77,98 +77,132 @@
     {% block content %}{% endblock %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-      let book_list_obj = {{ user_list_obj|safe }}
-      $(document).on('keyup', '.list_value', function () {
-        let value = $(this).val();
-        console.log(book_list_obj);
-        if (value.length > 2) {
-          var findsearch = book_list_obj.filter(function(book_list_obj) {
-            return book_list_obj.toLowerCase().includes(value.toLowerCase());
-          });
+        let book_list_obj = {{ user_list_obj|safe }}
+        $(document).on('keyup', '.list_value', function () {
+          let value = $(this).val();
+          console.log(book_list_obj);
+          if (value.length > 2) {
+            var findsearch = book_list_obj.filter(function(book_list_obj) {
+              return book_list_obj.toLowerCase().includes(value.toLowerCase());
+            });
 
-          let html = '';
+            let html = '';
 
-          if (findsearch.length > 0) {
-            for (let i = 0; i < findsearch.length; i++) {
-              html += `<li class="bg-light list_li_type" id="1" data-value="${findsearch[i]}"
-                data-desc="${findsearch[i]}"
-                style="cursor:pointer;">${findsearch[i]}</li>`;
+            if (findsearch.length > 0) {
+              for (let i = 0; i < findsearch.length; i++) {
+                html += `<li class="bg-light list_li_type" id="1" data-value="${findsearch[i]}"
+                  data-desc="${findsearch[i]}"
+                  style="cursor:pointer;">${findsearch[i]}</li>`;
+              }
+              $("#suggestions").html(html);
+              $("#suggestions").css("display", "block");
             }
-            $("#suggestions").html(html);
-            $("#suggestions").css("display", "block");
+          } else {
+            $("#suggestions").css("display", "none");
           }
-        } else {
+        });
+
+        var input_field_value = [];
+        $(document).on('click', '.list_li_type', function () {
+          let value = $(this).text();
+          input_field_value.push(value);
+          $(".list_value").val(input_field_value.join(''));
           $("#suggestions").css("display", "none");
-        }
-      });
-
-      var input_field_value = [];
-      $(document).on('click', '.list_li_type', function () {
-        let value = $(this).text();
-        input_field_value.push(value);
-        $(".list_value").val(input_field_value.join(''));
-        $("#suggestions").css("display", "none");
-      });
+        });
 
 
-      $(document).on('click', '.return-btn', function () {
-        let text_val = $(this).val()
-        let book_borrow_id = $(this).attr("data-id");
-        if (text_val == "No"){
-          $(this).val("Yes")
-          $(this).css("background-color", "green");
-          var return_btn_value = "yes"
-        }else{
-          $(this).val("No")
-          $(this).css("background-color", "#dd4343");
-          var return_btn_value = "no"
-        }
-        $.ajax({
-          type: 'POST',
-            url: "{% url 'return_books' %}",
-            data: {"return_btn_value":return_btn_value, "book_value":book_borrow_id, "csrfmiddlewaretoken":$("input[name=csrfmiddlewaretoken]").val()},
-            success: function (response) {
-              console.log(response,"5555555")
-              if (response.status == true){
-                var current_date  = response.return_date
-                var dateComponents = current_date.split("-");
-                var current_year = parseInt(dateComponents[0]);
-                var current_month = parseInt(dateComponents[1]);
-                var current_day = parseInt(dateComponents[2]);
-                var current_date = new Date(current_year, current_month-1, current_day);
-                console.log(current_date)
+        $(document).on('click', '.return-btn', function () {
+          let text_val = $(this).val()
+          var row = $(this).closest('tr');
+          var fineChargeTd = row.find('.fine_charge');
+          let book_borrow_id = $(this).attr("data-id");
+          if (text_val == "No"){
+            $(this).val("Yes")
+            $(this).css("background-color", "green");
+            var return_btn_value = "yes"
+          }else{
+            $(this).val("No")
+            $(this).css("background-color", "#dd4343");
+            var return_btn_value = "no"
+          }
+          $.ajax({
+            type: 'POST',
+              url: "{% url 'return_books' %}",
+              data: {"return_btn_value":return_btn_value, "book_value":book_borrow_id, "csrfmiddlewaretoken":$("input[name=csrfmiddlewaretoken]").val()},
+              success: function (response) {
+                console.log(response,"5555555")
+                if (response.status == true){
+                  var current_date  = response.return_date
+                  var dateComponents = current_date.split("-");
+                  var current_year = parseInt(dateComponents[0]);
+                  var current_month = parseInt(dateComponents[1]);
+                  var current_day = parseInt(dateComponents[2]);
+                  var current_date = new Date(current_year, current_month-1, current_day);
+                  console.log(current_date)
 
-                var due_date = $("#due_date").text();
-                console.log(due_date)
-                var duedateComponents = due_date.split("-");
-                var due_day = parseInt(duedateComponents[0]);
-                var due_month = parseInt(duedateComponents[1]);
-                var due_year = parseInt(duedateComponents[2]);
-                var due_date = new Date(due_year, due_month-1, due_day);
-                // var timeDifference = current_date - due_date;
-                var timeDifference = due_date - current_date;
+                  var due_date = row.find('#due_date').text();
+                  console.log(due_date)
+                  var duedateComponents = due_date.split("-");
+                  var due_day = parseInt(duedateComponents[0]);
+                  var due_month = parseInt(duedateComponents[1]);
+                  var due_year = parseInt(duedateComponents[2]);
+                  var due_date = new Date(due_year, due_month-1, due_day);
+                  var timeDifference = due_date - current_date;
 
-                daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-                if (daysDifference < 0) {
-                      var positiveValue = Math.abs(daysDifference);
-                      var fine_value = 10 * positiveValue;
-                      $(".fine_charge").text(fine_value);
-                      console.log(fine_value);
-                    }
-              }else{
-                      $(".fine_charge").text("0");
-                    }
+                  daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                  if (daysDifference < 0) {
+                        var positiveValue = Math.abs(daysDifference);
+                        var fine_value = 10 * positiveValue;
+                        var fineCharge = fineChargeTd.text(fine_value);
+                      }
+                }else{
+                  var fineCharge = fineChargeTd.text("0");
+                      }
 
-            }
+              }
 
+          })
         })
-      })
-      // if (daysDifference > 0) {
-      //   var positiveValue = Math.abs(daysDifference);
-      //   var fine_value = 10 * positiveValue;
-      //   $(".fine_charge").text(fine_value);
-      //   console.log(fine_value);
-      // }
+        // calculate due_date time daily
+
+      
+        $('tr.book_data').each(function() {
+                var row = $(this);
+    
+                var due_date = row.find('.date-style').text();
+                var due_date = due_date.split("-");
+                var due_day = parseInt(due_date[0]);
+                var due_month = parseInt(due_date[1]);
+                var due_year = parseInt(due_date[2]);
+                var due_date = new Date(due_year, due_month-1, due_day);
+
+                var currentDate = new Date();
+                var currentday = currentDate.getDate();
+                var currentmonth = currentDate.getMonth() + 1;
+                var currentyear = currentDate.getFullYear();
+                var current_date = new Date(currentyear, currentmonth-1, currentday)
+                var timeDifference = due_date - current_date;
+                var daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+                if (daysDifference<=0){
+                  row.find('.date-style').css("color", "red")
+                }
+        });
+
+      // $('div.book').each(function() {
+      //   var row = $(this);
+      //   var status = row.find(".other").text().split(":")[1].trim()
+      //   console.log(status.length)
+      //   if (status=="no"){
+      //     console.log("hiiiiiiiiiiii")
+      //     row.find("a").removeAttr('href').css("background-color","lightgrey");
+      //     // row.find("a").css('pointer-events', 'none');
+      //   }else{
+      //     console.log("nooooooooooo")
+      //   }
+      //   console.log(status)
+      //   row.find("a")
+      // })
     </script>
   </body>
 </html>

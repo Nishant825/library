@@ -27,7 +27,11 @@
         <div class="other">
           <p>Available: {{book.availability_status}}</p>
         </div>
-        <a href="{% url 'assign_book' book.id%}" class="assign trigger">Assign Book</a>
+        {% if book.availability_status == "no" %}
+        <a  style="background-color:lightgrey"; class="assign trigger">Assigned</a>
+        {% else %}
+        <a  href="{% url 'assign_book' book.id%}" class="assign trigger">Assign Book</a>
+        {% endif %}
       </div>
       {% endfor %}
     </div>

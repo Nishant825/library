@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from .models import Book
 from django.contrib.auth.decorators import login_required
@@ -30,6 +30,18 @@ def search_user(request):
 def assign_book(request,book_id):
     user_list = list(User.objects.all().values_list("username", flat=True))
     book_obj = Book.objects.get(id=book_id)
+    if request.method == "POST":
+        title_data = request.POST.get("title_data")
+        print(title_data,"55455555555555555")
+        username  = request.POST.get("username")
+        due_date = request.POST.get("due_date")
+        user = User.objects.get(username=username)
+        book = Book.objects.get(title=title_data)
+        book_obj = BookBorrow.objects.create(user=user, due_date=due_date, book=book)
+        book_obj.book.availability_status = "no"
+        book_obj.book.save()
+        if book_obj:
+            return redirect("issued_books")
     return render(request, "bookassign.html", {"books":book_obj, "user_list_obj":user_list})
 
 @staff_permission_required
@@ -37,7 +49,6 @@ def borrow_book(request):
     books_list = BookBorrow.objects.all()
     print(books_list,"909009")
     return render(request, "issuedbooks.html", {"books":books_list})
-
 
 def return_books(request):
     return_status_value = request.POST.get("return_btn_value", None)

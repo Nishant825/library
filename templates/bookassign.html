@@ -8,15 +8,17 @@
             <img src="{{books.cover_img.url}}" alt="">
         </div>
         <div class="form_container">
-            <form action="">
+            <form action="" method="post">
+                {% csrf_token %}
                 <span class="text_label book_ttl" >Book Name: </span><span class="text_label">{{books.title}}</span><br>
+                <input type="hidden" name="title_data" id="static_data_input" value="{{books.title}}">
                 <span class="text_label author_ttl">Author Name: </span><span class="text_label">{{books.author}}</span><br><br><br>
                 <span class="text_label"> Member Name</span>
-                <input class="list_value" type="text"><br>
+                <input class="list_value" name="username" type="text"><br>
                 <div class="suggestions" id="suggestions">
                 </div>
                 <span class="text_label"> Return Date</span>
-                <input type="date"><br>
+                <input type="date" name="due_date" ><br>
                 <input type="submit" value="Submit">
             </form>
         </div>

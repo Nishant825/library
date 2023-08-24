@@ -15,7 +15,7 @@
         <th>Fine(INR)</th>
     </tr>
     {% for book in books %}
-    <tr>
+    <tr class="book_data">
         <td><img src="{{book.book.cover_img.url}}" alt=""></td>
         <td>{{book.book.title}}</td>
         <td class="date-style" id="due_date">{{book.due_date | date:"d-m-Y"}}</td>
