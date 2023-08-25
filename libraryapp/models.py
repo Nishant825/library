@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import date
 
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
@@ -42,10 +42,12 @@ class BookBorrow(models.Model):
     return_date = models.DateField(null=True, blank=True)
 
     def calculate_due_date(self):
-        if self.return_date and self.due_date:
-            if  (self.return_date - self.due_date).days > 0:
-                return True
-        return False
+        current_date = date.today()
+        if self.due_date:
+            charges = (self.due_date - current_date).days
+            if charges<0:
+                return abs(charges)*20
+        return 0
 
     def __str__(self):
         return self.book.title

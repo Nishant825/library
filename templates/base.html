@@ -119,10 +119,14 @@
           if (text_val == "No"){
             $(this).val("Yes")
             $(this).css("background-color", "green");
+
+            
             var return_btn_value = "yes"
           }else{
-            $(this).val("No")
             $(this).css("background-color", "#dd4343");
+
+            $(this).val("No")
+            
             var return_btn_value = "no"
           }
           $.ajax({
@@ -130,39 +134,17 @@
               url: "{% url 'return_books' %}",
               data: {"return_btn_value":return_btn_value, "book_value":book_borrow_id, "csrfmiddlewaretoken":$("input[name=csrfmiddlewaretoken]").val()},
               success: function (response) {
-                console.log(response,"5555555")
                 if (response.status == true){
-                  var current_date  = response.return_date
-                  var dateComponents = current_date.split("-");
-                  var current_year = parseInt(dateComponents[0]);
-                  var current_month = parseInt(dateComponents[1]);
-                  var current_day = parseInt(dateComponents[2]);
-                  var current_date = new Date(current_year, current_month-1, current_day);
-                  console.log(current_date)
-
-                  var due_date = row.find('#due_date').text();
-                  console.log(due_date)
-                  var duedateComponents = due_date.split("-");
-                  var due_day = parseInt(duedateComponents[0]);
-                  var due_month = parseInt(duedateComponents[1]);
-                  var due_year = parseInt(duedateComponents[2]);
-                  var due_date = new Date(due_year, due_month-1, due_day);
-                  var timeDifference = due_date - current_date;
-
-                  daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-                  if (daysDifference < 0) {
-                        var positiveValue = Math.abs(daysDifference);
-                        var fine_value = 10 * positiveValue;
-                        var fineCharge = fineChargeTd.text(fine_value);
-                      }
-                }else{
-                  var fineCharge = fineChargeTd.text("0");
-                      }
-
+      
+                    row.find(".fine_charge").text("Paid")
+                  }else{
+                  row.find(".fine_charge").text("0")
+                  }
               }
+    })
+  })
 
-          })
-        })
+
         // calculate due_date time daily
 
       
@@ -203,6 +185,17 @@
       //   console.log(status)
       //   row.find("a")
       // })
+      // $('.return-btn').each(function() {
+      //   var row = $(this).closest('tr');
+      //   btn_val = row.find(".return-btn").val()
+      //   if (btn_val=="No"){
+      //   row.find(".return-btn").css("background-color", "#dd4343");
+      //   }else{
+      //     row.find(".return-btn").css("background-color", "green");
+      //   }
+
+      // })
+    
     </script>
   </body>
 </html>

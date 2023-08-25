@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from .models import Book
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -53,11 +53,17 @@ def borrow_book(request):
 def return_books(request):
     return_status_value = request.POST.get("return_btn_value", None)
     book_value = request.POST.get("book_value", None)
-    if return_status_value == "yes" and book_value:
-        borow_book = BookBorrow.objects.get(id=book_value)
-        current_date = datetime.datetime.now().date()
-        borow_book.return_date = current_date
-        borow_book.save()
-        return_date = borow_book.return_date
-        return JsonResponse({"return_date":return_date, "status":True})
-    return JsonResponse({"return_date":"", "status":False})
+    borow_book = BookBorrow.objects.get(id=book_value)
+    if borow_book and book_value:
+        if return_status_value == "yes":
+            current_date = datetime.datetime.now().date()
+            borow_book.return_date = current_date
+            borow_book.save()
+            return_date = borow_book.return_date
+            return JsonResponse({"return_date":return_date, "status":True})
+        else:
+            borow_book.return_date = None
+            borow_book.save()
+            return JsonResponse({"return_date":"", "status":False})
+        
+    

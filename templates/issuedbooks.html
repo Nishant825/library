@@ -1,28 +1,32 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% load static %}
-{% block urlBookActive %}active{% endblock urlBookActive %}
+{% block urlBookActive %}
+active
+{% endblock urlBookActive %} 
 {% block content %}
 <!-- {% load custom_filters %} -->
 
 <table class="custom-table">
-    {% csrf_token %}
-    <tr>
-        <th>Book Image</th>
-        <th>Book Title</th>
-        <th>Due Date</th>
-        <th>User</th>
-        <th>Returned</th>
-        <th>Fine(INR)</th>
-    </tr>
-    {% for book in books %}
-    <tr class="book_data">
-        <td><img src="{{book.book.cover_img.url}}" alt=""></td>
-        <td>{{book.book.title}}</td>
-        <td class="date-style" id="due_date">{{book.due_date | date:"d-m-Y"}}</td>
-        <td>{{book.user.username}}</td> 
-          <td><input data-id="{{book.id}}" class="return-btn" type="button" value="No"></td>
-        <td class="fine_charge">0</td>
-    </tr>
-    {% endfor %}
+  {% csrf_token %}
+  <tr>
+    <th>Book Image</th>
+    <th>Book Title</th>
+    <th>Due Date</th>
+    <th>User</th>
+    <th>Returned</th>
+    <th>Fine(INR)</th>
+  </tr>
+  {% for book in books %}
+  <tr class="book_data">
+    <td><img src="{{book.book.cover_img.url}}" alt="" /></td>
+    <td>{{book.book.title}}</td>
+    <td class="date-style" id="due_date">{{book.due_date | date:"d-m-Y"}}</td>
+    <td>{{book.user.username}}</td>
+    <td>
+      <input class="{% if book.return_date %}green-text{% else %}red-text{% endif %} return-btn"  data-id="{{book.id}}" type="button" value="{% if book.return_date %}Yes{% else %}No{% endif %}">
+    </td>
+    <td class="fine_charge">{{book.calculate_due_date}}</td>
+  </tr>
+  {% endfor %}
 </table>
 {% endblock %}
