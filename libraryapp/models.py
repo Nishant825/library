@@ -40,7 +40,8 @@ class BookBorrow(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     due_date = models.DateField(null=True)
     return_date = models.DateField(null=True, blank=True)
-
+    fine = models.PositiveIntegerField(null=True, blank=True)
+    
     def calculate_due_date(self):
         if self.return_date and self.due_date:
             if  (self.return_date - self.due_date).days > 0:
