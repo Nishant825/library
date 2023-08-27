@@ -1,5 +1,6 @@
 body {
   background-color: azure;
+  /* background-image: linear-gradient(to right bottom, #051937, #542a5d, #a53761, #df5f46, #eba312); */
   overflow-y: scroll;
 }
 
@@ -148,7 +149,7 @@ nav {
 
   display: flex;
   width: 100%;
-  /* justify-content: space-between; */
+  justify-content: space-between;
 
   align-items: center;
 
@@ -178,6 +179,7 @@ nav {
 .nav-links {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   /* width: 10%; */
   margin-left: 440px;
   margin-right: 10px;
@@ -214,20 +216,17 @@ nav {
   letter-spacing: 3px;
   font-weight: bold;
   font-size: 14px;
-  /* padding: 14px 16px; */
   font-family: "Montserrat", sans-serif;
-  margin: 2px;
-
   border: none;
-  padding: 15px 32px;
+  padding: 15px 30px;
   text-align: center;
+  width: 131px;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  /* margin: 4px 2px; */
   cursor: pointer;
-  margin-left: 45px;
-  margin-top: inherit;
+  margin-left: 28px;
+  margin-top: 10px;
 }
 
 /* .nav-links a:hover{
@@ -237,6 +236,8 @@ nav {
 
 .nav-links li a.active {
   background-color: #3498db;
+  border-radius: 5px;
+
 
 }
 
@@ -340,9 +341,10 @@ nav div.avatar {
   /* border: 2px solid black; */
   margin-top: 20px;
   height: 100%;
-  margin: 0px;
+  margin: 40px;
   flex: 1;
   text-align: center;
+  position: relative;
 }
 
 .cover_img{
@@ -358,7 +360,6 @@ nav div.avatar {
   justify-content: center;
   align-items: center;
   margin-top: 50px;
-  height: 100vh; /* Adjust as needed */
 }
 
 .book_wrap form span {
@@ -385,23 +386,25 @@ nav div.avatar {
 
 
 .book_wrap form input[type="text"], input[type="date"]{
-  /* border: 2px solid black; */
   width: 85%;
   padding: 10px;
   margin-bottom: 15px;
   margin-top: 10px;
-  border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  border: none;
 }
 
+.book_wrap form input[type="text"], input[type="date"]:focus{
+  outline: none;
+}
 
 .book_wrap form input[type="submit"]{
   /* border: 2px solid black; */
   width: 55%;
   padding: 10px;
   margin-bottom: 15px;
-  margin-top: 10px;
+  margin-top: 20px;
   background-color: #3498db;
   border: none;
   border-radius: 4px;
@@ -417,22 +420,19 @@ nav div.avatar {
 
 .suggestions {
   position: absolute;
-  width: 326px;
-  margin-left: 18px;
-  /* height: 100px; */
-  height: auto;
-  /* overflow-y: auto; */
-  background-color: white;
-  border: 1px solid #ccc;
+  top: 158px;
+  width: 90%;
+  height: 50px;
+  font-size: 18px;
+  background-color: silver;
+  left: 18px;
   border-top: none;
-  border-radius: 2px;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
   display: none;
 }
 
 .suggestion-item {
-  padding: 10px;
+  /* padding: 10px; */
   cursor: pointer;
 }
 
