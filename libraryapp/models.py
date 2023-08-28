@@ -40,7 +40,8 @@ class BookBorrow(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     due_date = models.DateField(null=True)
     return_date = models.DateField(null=True, blank=True)
-
+    fine = models.PositiveIntegerField(null=True, blank=True)
+    
     def calculate_due_date(self):
         current_date = date.today()
         if self.due_date:

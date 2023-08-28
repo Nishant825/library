@@ -64,13 +64,16 @@
         <li><a href="{% url 'login' %}">Login</a></li>
         <li><a href="{% url 'signup' %}">Signup</a></li>
         {% endif %}
-      </ul>
+      
       {% if request.user.is_authenticated %}
-      <div class="avatar">
-        <span class="avatar-letter"
-          >{{ request.user.username|first|upper }}</span
-        >
-      </div>
+      <li>
+        <div class="avatar">
+          <span class="avatar-letter"
+            >{{ request.user.username|first|upper }}</span
+          >
+        </div>
+      </li>
+    </ul>
       {% endif %}
     </nav>
 
