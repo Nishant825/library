@@ -26,7 +26,7 @@ active
     <td>
       <input class="{% if book.return_date %}green-text{% else %}red-text{% endif %} return-btn"  data-id="{{book.id}}" type="button" value="{% if book.return_date %}Yes{% else %}No{% endif %}">
     </td>
-    <td class="fine_charge">{{book.calculate_due_date}}</td>
+    <td name="fine_value" class="fine_charge">{{book.calculate_due_date}}</td>
   </tr>
   {% endfor %}
 </table>
