@@ -53,6 +53,8 @@ def borrow_book(request):
 def return_books(request):
     return_status_value = request.POST.get("return_btn_value", None)
     book_value = request.POST.get("book_value", None)
+    fine_val = request.POST.get("fineCharge", None)
+    print(fine_val,"9999")
     borow_book = BookBorrow.objects.get(id=book_value)
     if borow_book and book_value:
         if return_status_value == "yes":
