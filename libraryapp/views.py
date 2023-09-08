@@ -7,6 +7,7 @@ from .models import BookBorrow
 from accounts.permissions import staff_permission_required
 import datetime
 
+
 @login_required(login_url="login")
 def books(request, filterBy=None):
     books = Book.objects.all()
@@ -60,7 +61,10 @@ def return_books(request):
         if return_status_value == "yes":
             current_date = datetime.datetime.now().date()
             borow_book.return_date = current_date
+            borow_book.fine = fine_val
             borow_book.save()
+            borow_book.book.availability_status = "yes"
+            borow_book.book.save()
             return_date = borow_book.return_date
             return JsonResponse({"return_date":return_date, "status":True})
         else:

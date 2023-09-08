@@ -125,6 +125,7 @@
 
             $(this).val("Yes")
             $(this).css("background-color", "green");
+            $(this).css("pointer-events", "none");
 
             
             var return_btn_value = "yes"
@@ -144,8 +145,6 @@
                 if (response.status == true){
       
                     row.find(".fine_charge").text("Paid")
-                  }else{
-                  row.find(".fine_charge").text("0")
                   }
               }
     })

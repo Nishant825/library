@@ -115,3 +115,6 @@ td input[type="button"]{
         margin-top: inherit;
 }
 
+.disable_text{
+    pointer-events: none;
+}
