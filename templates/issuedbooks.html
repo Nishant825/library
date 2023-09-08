@@ -24,9 +24,9 @@ active
     <td class="date-style" id="due_date">{{book.due_date | date:"d-m-Y"}}</td>
     <td>{{book.user.username}}</td>
     <td>
-      <input class="{% if book.return_date %}green-text{% else %}red-text{% endif %} return-btn"  data-id="{{book.id}}" type="button" value="{% if book.return_date %}Yes{% else %}No{% endif %}">
+      <input class="{% if book.return_date %}green-text disable_text{% else %}red-text{% endif %} return-btn"  data-id="{{book.id}}" type="button" value="{% if book.return_date %}Yes{% else %}No{% endif %}">
     </td>
-    <td name="fine_value" class="fine_charge">{{book.calculate_due_date}}</td>
+    <td name="fine_value" class="fine_charge">{% if book.fine or book.fine == 0 %} Paid {% else %} {{book.calculate_due_date}}  {% endif %}</td>
   </tr>
   {% endfor %}
 </table>

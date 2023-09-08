@@ -42,6 +42,9 @@ class BookBorrow(models.Model):
     return_date = models.DateField(null=True, blank=True)
     fine = models.PositiveIntegerField(null=True, blank=True)
     
+    class Meta:
+       ordering = ['-id']
+    
     def calculate_due_date(self):
         current_date = date.today()
         if self.due_date:
