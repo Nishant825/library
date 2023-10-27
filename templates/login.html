@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login & Registration Form</title>
-  <!---Custom CSS File--->
   <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
@@ -17,6 +16,7 @@
         {% csrf_token %}
         <input name="username" type="text" placeholder="Username">
         <input name="password" type="password" placeholder="Enter your password">
+        <div class="g-recaptcha" data-sitekey="6LcbstMoAAAAAJezzufllQF03TCRHyg4OGZA5sFI"></div>
         <a href="#">Forgot password?</a>
         <input type="submit" class="button" value="Login">
       </form>
@@ -28,5 +28,6 @@
       </div>
     </div>
   </div>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>
