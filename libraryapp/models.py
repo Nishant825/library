@@ -42,14 +42,11 @@ class BookBorrow(models.Model):
     return_date = models.DateField(null=True, blank=True)
     fine = models.PositiveIntegerField(null=True, blank=True)
     
-<<<<<<< HEAD
-=======
     def format_name(self):
         return f"{self.user.first_name.capitalize()} {self.user.last_name.capitalize()}"
     class Meta:
        ordering = ['-id']
     
->>>>>>> cd1e3f2061fd73dc75aaee35d8955a3dcf60932f
     def calculate_due_date(self):
         current_date = date.today()
         if self.due_date:
