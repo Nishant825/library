@@ -13,7 +13,7 @@ active
     <th>Book Image</th>
     <th>Book Title</th>
     <th>Due Date</th>
-    <th>User</th>
+    <th>Name</th>
     <th>Returned</th>
     <th>Fine(INR)</th>
   </tr>
@@ -22,9 +22,9 @@ active
     <td><img src="{{book.book.cover_img.url}}" alt="" /></td>
     <td>{{book.book.title}}</td>
     <td class="date-style" id="due_date">{{book.due_date | date:"d-m-Y"}}</td>
-    <td>{{book.user.username}}</td>
+    <td>{{book.format_name}}</td>
     <td>
-      <input class="{% if book.return_date %}green-text disable_text{% else %}red-text{% endif %} return-btn"  data-id="{{book.id}}" type="button" value="{% if book.return_date %}Yes{% else %}No{% endif %}">
+      <input class="{% if book.return_date %}green-text{% else %}red-text{% endif %} return-btn"  data-id="{{book.id}}" type="button" value="{% if book.return_date %}Yes{% else %}No{% endif %}">
     </td>
     <td name="fine_value" class="fine_charge">{% if book.fine or book.fine == 0 %} Paid {% else %} {{book.calculate_due_date}}  {% endif %}</td>
   </tr>

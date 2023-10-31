@@ -121,11 +121,8 @@
           var fineCharge = row.find('.fine_charge').text();
           let book_borrow_id = $(this).attr("data-id");
           if (text_val == "No"){
-          
-
             $(this).val("Yes")
             $(this).css("background-color", "green");
-            $(this).css("pointer-events", "none");
 
             
             var return_btn_value = "yes"
@@ -140,7 +137,7 @@
           $.ajax({
             type: 'POST',
               url: "{% url 'return_books' %}",
-              data: {"return_btn_value":return_btn_value,"fineCharge":fineCharge, "book_value":book_borrow_id, "csrfmiddlewaretoken":$("input[name=csrfmiddlewaretoken]").val()},
+              data: {"return_btn_value":return_btn_value,"fineCharge":45, "book_value":book_borrow_id, "csrfmiddlewaretoken":$("input[name=csrfmiddlewaretoken]").val()},
               success: function (response) {
                 if (response.status == true){
       
