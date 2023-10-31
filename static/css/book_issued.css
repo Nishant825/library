@@ -14,9 +14,9 @@ th, td {
     text-align: center;
 }
 
-.green-text{
+/* .green-text{
     background-color: green;
-}
+} */
 
 .red-text{
     background-color: #dd4343;
@@ -51,9 +51,14 @@ td img{
 }
 
 td .return-btn {
+    background-color: grey;
     white-space: nowrap; 
     text-align: center;
     width: 100px;
+}
+
+td .return-btn:hover{
+    background-color: green;
 }
 
 /* Reset default browser styling for select elements

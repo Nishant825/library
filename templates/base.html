@@ -120,18 +120,17 @@
           var row = $(this).closest('tr');
           var fineCharge = row.find('.fine_charge').text();
           let book_borrow_id = $(this).attr("data-id");
-          if (text_val == "No"){
-            $(this).val("Yes")
-            $(this).css("background-color", "green");
-
-            
+          if (text_val == "Yes"){
+            // $(this).val("Yes")
+            // $(this).css("background-color", "green");
+            row.remove();
             var return_btn_value = "yes"
-          }else{
-            $(this).css("background-color", "#dd4343");
+          // }else{
+          //   $(this).css("background-color", "#dd4343");
 
-            $(this).val("No")
+          //   $(this).val("No")
             
-            var return_btn_value = "no"
+          //   var return_btn_value = "no"
           }
 
           $.ajax({

@@ -15,7 +15,6 @@ active
     <th>Due Date</th>
     <th>Name</th>
     <th>Returned</th>
-    <th>Fine(INR)</th>
   </tr>
   {% for book in books %}
   <tr class="book_data">
@@ -26,7 +25,6 @@ active
     <td>
       <input class="{% if book.return_date %}green-text{% else %}red-text{% endif %} return-btn"  data-id="{{book.id}}" type="button" value="{% if book.return_date %}Yes{% else %}No{% endif %}">
     </td>
-    <td name="fine_value" class="fine_charge">{% if book.fine or book.fine == 0 %} Paid {% else %} {{book.calculate_due_date}}  {% endif %}</td>
   </tr>
   {% endfor %}
 </table>
