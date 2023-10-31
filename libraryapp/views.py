@@ -48,7 +48,6 @@ def assign_book(request,book_id):
 @staff_permission_required
 def borrow_book(request):
     books_list = BookBorrow.objects.all()
-    print(books_list,"909009")
     return render(request, "issuedbooks.html", {"books":books_list})
 
 def return_books(request):

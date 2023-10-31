@@ -6,6 +6,19 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
+.error, .alert-danger {
+  list-style: None;
+  text-align: center;
+  color: red;
+  padding: 10px;
+}
+
+.g-recaptcha {
+  transform:scale(1.2,0.9);
+  transform-origin:0 0;
+  }
+
 body{
   min-height: 100vh;
   width: 100%;
