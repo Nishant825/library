@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import date
 
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
@@ -42,11 +42,21 @@ class BookBorrow(models.Model):
     return_date = models.DateField(null=True, blank=True)
     fine = models.PositiveIntegerField(null=True, blank=True)
     
+<<<<<<< HEAD
+=======
+    def format_name(self):
+        return f"{self.user.first_name.capitalize()} {self.user.last_name.capitalize()}"
+    class Meta:
+       ordering = ['-id']
+    
+>>>>>>> cd1e3f2061fd73dc75aaee35d8955a3dcf60932f
     def calculate_due_date(self):
-        if self.return_date and self.due_date:
-            if  (self.return_date - self.due_date).days > 0:
-                return True
-        return False
+        current_date = date.today()
+        if self.due_date:
+            charges = (self.due_date - current_date).days
+            if charges<0:
+                return abs(charges)*20
+        return 0
 
     def __str__(self):
         return self.book.title
