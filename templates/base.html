@@ -40,6 +40,13 @@
             >BooksIssued</a
           >
         </li>
+
+        <li>
+          <a
+            class="{% block urlBookHistoryActive %}{% endblock urlBookHistoryActive %}"
+            href="{% url 'issued_borrow_history' %}"
+            >BooksIssuedHistory</a>
+        </li>
         <!-- <li><a href="pages/about.html">Genre</a></li>
          -->
         <!-- <li>Genre</li> -->
@@ -115,33 +122,33 @@
 
 
         $(document).on('click', '.return-btn', function () {
-          
-          let text_val = $(this).val()
           var row = $(this).closest('tr');
-          var fineCharge = row.find('.fine_charge').text();
+          issed_book_id = row.attr('id')
+          console.log(issed_book_id,"===========")
           let book_borrow_id = $(this).attr("data-id");
-          if (text_val == "Yes"){
-            // $(this).val("Yes")
-            // $(this).css("background-color", "green");
+          let rows = $(this).closest('table').find('tr');
+          var numberOfRows = rows.length;
+          if (numberOfRows>2){
             row.remove();
-            var return_btn_value = "yes"
-          // }else{
-          //   $(this).css("background-color", "#dd4343");
-
-          //   $(this).val("No")
-            
-          //   var return_btn_value = "no"
+          } else{
+            rows.remove()
+            $('tbody').append("<h2 style='text-align:center;'>No books Found</h2>")
           }
-
+          row.remove();
+          var return_btn_value = "yes"
+          var title = row.find('td:eq(1)').attr('id')
+          var due_date = row.find('td:eq(2)').text()
+          var name = row.find('td:eq(3)').attr('id')
+          console.log(title, due_date, name)
+          var csrftoken = $("[name=csrfmiddlewaretoken]").val();
           $.ajax({
             type: 'POST',
               url: "{% url 'return_books' %}",
-              data: {"return_btn_value":return_btn_value,"fineCharge":45, "book_value":book_borrow_id, "csrfmiddlewaretoken":$("input[name=csrfmiddlewaretoken]").val()},
+              data: {"issed_book_id":issed_book_id, "return_btn_value":return_btn_value,"due_date":due_date, "book_value":title,"user":name},
+              beforeSend: function (xhr){
+                xhr.setRequestHeader('X-CSRFToken', csrftoken);
+              },
               success: function (response) {
-                if (response.status == true){
-      
-                    row.find(".fine_charge").text("Paid")
-                  }
               }
     })
   })
@@ -173,30 +180,30 @@
                 }
         });
 
-      // $('div.book').each(function() {
-      //   var row = $(this);
-      //   var status = row.find(".other").text().split(":")[1].trim()
-      //   console.log(status.length)
-      //   if (status=="no"){
-      //     console.log("hiiiiiiiiiiii")
-      //     row.find("a").removeAttr('href').css("background-color","lightgrey");
-      //     // row.find("a").css('pointer-events', 'none');
-      //   }else{
-      //     console.log("nooooooooooo")
-      //   }
-      //   console.log(status)
-      //   row.find("a")
-      // })
-      // $('.return-btn').each(function() {
-      //   var row = $(this).closest('tr');
-      //   btn_val = row.find(".return-btn").val()
-      //   if (btn_val=="No"){
-      //   row.find(".return-btn").css("background-color", "#dd4343");
-      //   }else{
-      //     row.find(".return-btn").css("background-color", "green");
-      //   }
+        
+      $('.Checkbox').on('click', function () {
+        var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+        var book_id = $(this).attr("data-id")
+        
+        if ($(this).is(':checked')) {
+          var fine_val = $(this).closest('tr').find("#fine_val").text();
+          var paid = 1;
+        }else{
+          var paid = 0;
+          var fine_val = 0
+        }
 
-      // })
+          $.ajax({
+            type: 'POST',
+              url: "{% url 'fine_paid' %}",
+              data: {"book_id":book_id, "paid":paid, "fine_val":fine_val},
+              beforeSend: function (xhr){
+                xhr.setRequestHeader('X-CSRFToken', csrftoken);
+              },
+              success: function (response) {
+              }
+            })
+      });
     
     </script>
   </body>
