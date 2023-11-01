@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from .models import Book
+from .models import Book, BookBorrowHistory
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import BookBorrow
 from accounts.permissions import staff_permission_required
-import datetime
-
+from datetime import datetime
 
 @login_required(login_url="login")
 def books(request, filterBy=None):
@@ -51,24 +50,43 @@ def borrow_book(request):
     return render(request, "issuedbooks.html", {"books":books_list})
 
 def return_books(request):
-    return_status_value = request.POST.get("return_btn_value", None)
+    issed_book_id = request.POST.get("issed_book_id", None)
+    issued_book_obj = BookBorrow.objects.get(id=issed_book_id)
     book_value = request.POST.get("book_value", None)
-    fine_val = request.POST.get("fineCharge", None)
-    print(fine_val,"9999")
-    borow_book = BookBorrow.objects.get(id=book_value)
-    if borow_book and book_value:
-        if return_status_value == "yes":
-            current_date = datetime.datetime.now().date()
-            borow_book.return_date = current_date
-            borow_book.fine = fine_val
-            borow_book.save()
-            borow_book.book.availability_status = "yes"
-            borow_book.book.save()
-            return_date = borow_book.return_date
-            return JsonResponse({"return_date":return_date, "status":True})
+    book_value = Book.objects.get(id=book_value)
+    user = request.POST.get("user", None)
+    user = User.objects.get(id=user)
+    due_date = request.POST.get("due_date", None)
+    date_object = datetime.strptime(due_date, "%d-%m-%Y")
+    if issued_book_obj and book_value and due_date and user:
+        issued_book_obj.delete()
+        borow_book = BookBorrowHistory.objects.create(book = book_value, due_date=date_object, user=user)
+        if borow_book:
+            return JsonResponse({"status":True})
         else:
-            borow_book.return_date = None
-            borow_book.save()
-            return JsonResponse({"return_date":"", "status":False})
+            return JsonResponse({"status":False})
         
-    
+
+
+@staff_permission_required
+def issued_borrow_history(request):
+    books_list = BookBorrowHistory.objects.all()
+    return render(request, "issued_history.html", {"books":books_list})
+
+
+def fine_paid(request):
+    if request.method == "POST":
+        book_id = request.POST.get("book_id")
+        paid = request.POST.get("paid")
+        fine_val = request.POST.get("fine_val")
+        print(fine_val,"$$$$$$$$$$$$$")
+        book_obj = BookBorrowHistory.objects.get(id=book_id)
+        if not fine_val:
+            fine_val = 0
+        if book_obj:
+            book_obj.paid = bool(int(paid))
+            book_obj.fine = fine_val
+            book_obj.save()
+            return JsonResponse({"status":True})
+        else:
+            return JsonResponse({"status":False})
