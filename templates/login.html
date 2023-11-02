@@ -24,8 +24,8 @@
       <header>Login</header>
       <form action="" method="post">
         {% csrf_token %}
-        <input name="username" type="text" placeholder="Username">
-        <input name="password" type="password" placeholder="Enter your password">
+        <input class="user-input" name="username" type="text" placeholder="Username">
+        <input  class="user-input" name="password" type="password" placeholder="Enter your password">
         <div class="g-recaptcha" data-sitekey="6LeIpuMoAAAAAJ1uElaXPNfDIZQNGL-h4iJ-cuh2" required></div>
         <a href="#">Forgot password?</a>
         <input type="submit" class="button" value="Login">
@@ -39,5 +39,9 @@
     </div>
   </div>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   <script>
+      
+  </script>
 </body>
 </html>

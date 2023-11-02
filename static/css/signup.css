@@ -90,6 +90,7 @@ body{
 .form input.button:hover{
   background: #006653;
 }
+
 .signup{
   font-size: 17px;
   text-align: center;
@@ -100,4 +101,8 @@ body{
 }
 .signup a:hover{
   text-decoration: underline;
+}
+
+.form .form_error{
+  border: 1px solid red;
 }
