@@ -32,7 +32,6 @@ def assign_book(request,book_id):
     book_obj = Book.objects.get(id=book_id)
     if request.method == "POST":
         title_data = request.POST.get("title_data")
-        print(title_data,"55455555555555555")
         username  = request.POST.get("username")
         due_date = request.POST.get("due_date")
         user = User.objects.get(username=username)

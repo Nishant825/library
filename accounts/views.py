@@ -22,6 +22,7 @@ def user_signup(request):
     return render(request, "signup.html")
 
 def user_login(request):
+    error_occurred = False
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -32,16 +33,16 @@ def user_login(request):
         }
         response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=values)
         result = response.json()
-        print(result,"7787878")
         if result['success']:
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
                 return redirect("/")
+            error_occurred = True
             messages.error(request, 'username or password is incorrect')
         else:
             messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-    return render(request, "login.html")
+    return render(request, "login.html", {"error_occurred":json.dumps(error_occurred)})
 
 def user_logout(request):
     logout(request)
