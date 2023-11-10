@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login & Registration Form</title>
-  <!---Custom CSS File--->
   <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
@@ -15,16 +14,17 @@
       <header>Signup</header>
       <form action="" method="post">
         {% csrf_token %}
-        <input name="first_name"  type="text" placeholder="First Name">
-        <input name="last_name"  type="text" placeholder="Last Name">
-        <input name="username"  type="text" placeholder="Username">
-        <input name="email"  type="text" placeholder="Email">
-        <input name="password"  type="password" placeholder="Create a password">
-        <input name=""  type="button" class="button" value="Signup">
+        <input name="first_name"  type="text" placeholder="First Name" required>
+        <input name="last_name"  type="text" placeholder="Last Name" required>
+        <input name="username"  type="text" placeholder="Username" required>
+        <input name="email"  type="text" placeholder="Email" required>
+        <input name="password"  type="password" placeholder="Create a password" required>
+        <input name=""  type="submit" class="button" value="Signup">
+        
       </form>
       <div class="signup">
         <span class="signup">Already have an account?
-         <!-- <label for="check">Login</label> -->
+          <label for="check">Login</label>
          <a href="{% url 'login' %}">Login</a>
         </span>
       </div>

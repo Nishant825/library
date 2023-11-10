@@ -6,13 +6,19 @@ from django.contrib.auth.models import User
 from .models import BookBorrow
 from accounts.permissions import staff_permission_required
 from datetime import datetime
+from django.core.cache import cache
 
 @login_required(login_url="login")
 def books(request, filterBy=None):
-    books = Book.objects.all()
     if filterBy:
         books = Book.objects.filter(genre__name__icontains=filterBy)
+    elif 'books' in cache:
+        books = cache.get("books")
+    else:
+        books = Book.objects.all()
+        cache.set("books", books)
     return render(request, "index.html", {"books":books})
+
 
 @staff_permission_required
 def issued_books(request):
@@ -78,7 +84,6 @@ def fine_paid(request):
         book_id = request.POST.get("book_id")
         paid = request.POST.get("paid")
         fine_val = request.POST.get("fine_val")
-        print(fine_val,"$$$$$$$$$$$$$")
         book_obj = BookBorrowHistory.objects.get(id=book_id)
         if not fine_val:
             fine_val = 0
