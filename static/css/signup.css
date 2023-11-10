@@ -106,3 +106,11 @@ body{
 .form .form_error{
   border: 1px solid red;
 }
+
+
+#toaster{
+  text-align: center;
+  /* font-size: 18px; */
+  padding: 10px;
+  background-color: lightseagreen;
+}

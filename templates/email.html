@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #header {
+            background-color: #007ACC;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #content {
+            padding: 20px;
+        }
+
+        #login-link {
+            background-color: #007ACC;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        #login-link:hover {
+            background-color: #005580;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <h1>Welcome, {{username}}.</h1>
+        </div>
+        <div id="content">
+            <p>Your account has been successfully created. You can now log in to your account by clicking the link below:</p>
+            <a href='http://127.0.0.1:8000/accounts/verify_account/{{username}}'>Click here to confirm account</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
+  {% if from_signup %}
+  <div id="toaster"> 
+    <p>Account activation link is sent to your mail please activate your account.</p>
+  </div>
+  {% endif %}
   <div class="container">
   
     <div class="login form">
@@ -40,8 +45,12 @@
   </div>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-   <script>
-      
+  <script>
+    $(document).ready(function () {
+            setTimeout(function () {
+                $("#toaster").hide();
+            }, 5000);
+        });
   </script>
 </body>
 </html>

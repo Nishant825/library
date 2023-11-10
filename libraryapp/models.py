@@ -65,7 +65,6 @@ class BookBorrowHistory(models.Model):
         return f"{self.user.first_name.capitalize()} {self.user.last_name.capitalize()}"
 
     def calculate_fine(self):
-        print(self.due_date,"9090", self.return_date)
         charges = (self.due_date - self.return_date).days
         if self.due_date:
             if charges<0:
