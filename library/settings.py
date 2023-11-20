@@ -182,3 +182,6 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 # Optional: You can set the timezone for Celery tasks
 CELERY_TIMEZONE = 'UTC'
+
+CELERY_APP = "library"
+broker_connection_retry_on_startup = True
