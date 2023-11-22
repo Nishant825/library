@@ -3,7 +3,7 @@ name: Merge Dev to Main
 on:
   push:
     branches:
-      - dev
+      - develop
 
 jobs:
   merge-to-main:
@@ -20,7 +20,7 @@ jobs:
       run: git pull origin main
 
     - name: Merge dev into main
-      run: git merge dev
+      run: git merge develop
 
     # - name: Push changes to main
     #   run: |
