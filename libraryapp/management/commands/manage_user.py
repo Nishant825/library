@@ -22,7 +22,7 @@ class Command(BaseCommand):
                 try:
                     User.objects.create(first_name=first_name, last_name=self.fake.last_name(),
                         email=self.fake.email(), username=username, password="Nishant#2796")
-                    self.stdout.write(self.style.SUCCESS(f'User Recieved: {add_user} and created user {username}'))
+                    self.stdout.write(self.style.SUCCESS(f'User Recieved: {add_user} and created user is {username}'))
                 except Exception as err:
                     self.stdout.write(self.style.SUCCESS(f'User not created: recieved error  {str(err)} and created s'))
             self.stdout.write(self.style.SUCCESS(f'{add_user} users created successfully'))
