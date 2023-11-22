@@ -13,6 +13,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Set git identity
+      run: |
+        git config --global user.email "rnishant2796@gmail.com"
+        git config --global user.name "Nishant825"
+
     - name: Fetch latest changes from main
       run: git fetch --all
 
@@ -24,9 +29,3 @@ jobs:
 
     - name: Merge dev into main
       run: git merge develop --allow-unrelated-histories
-
-    - name: Push changes to main
-      run: |
-        git config --global user.email "rnishant2796@gmail.com"
-        git config --global user.name "Nishant825"
-        git push origin main
