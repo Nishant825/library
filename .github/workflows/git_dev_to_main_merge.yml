@@ -20,6 +20,7 @@ jobs:
         echo "123456" > ~/.ssh/password
         chmod 600 ~/.ssh/password
         export SSHPASS=$(cat ~/.ssh/password)
+        echo "SSHPASS is set: $SSHPASS" 
 
     - name: Deploy to Server
       run: |
