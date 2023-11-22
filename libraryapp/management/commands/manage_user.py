@@ -5,7 +5,7 @@ from datetime import datetime
 
 class Command(BaseCommand):
     fake = Faker()
-    help = 'Make users'
+    help = 'Make demo users'
 
     def add_arguments(self, parser):
         parser.add_argument('--add', type=int, help='for adding users')
