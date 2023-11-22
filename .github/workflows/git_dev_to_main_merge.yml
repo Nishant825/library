@@ -15,9 +15,6 @@ jobs:
 
     - name: Set up SSH password and Deploy to Server
       run: |
-          # mkdir -p ~/.ssh/
-          # echo "123456" > ~/.ssh/password
-          # chmod 600 ~/.ssh/password
           export SSHPASS="123456"
           sshpass -e ssh ubuntu@65.2.81.97 'cd /home/projects/library && git pull origin main'
          
