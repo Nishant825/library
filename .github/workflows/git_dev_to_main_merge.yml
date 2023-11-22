@@ -25,4 +25,4 @@ jobs:
     - name: Deploy to Server
       run: |
         # Add your deployment script or commands here
-        sshpass -e ssh ubuntu@65.2.81.97 'cd /home/projects/library && git pull origin main'
+        SSHPASS -e ssh ubuntu@65.2.81.97 'cd /home/projects/library && git pull origin main'
