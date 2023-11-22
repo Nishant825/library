@@ -15,6 +15,7 @@ jobs:
 
     - name: Set up SSH
       run: |
+        sudo apt-get install sshpass
         mkdir -p ~/.ssh/
         touch ~/.ssh/password
         echo "123456" > ~/.ssh/password
@@ -25,4 +26,4 @@ jobs:
     - name: Deploy to Server
       run: |
         # Add your deployment script or commands here
-        SSHPASS -e ssh ubuntu@65.2.81.97 'cd /home/projects/library && git pull origin main'
+        sshpass -p "123456" ssh ubuntu@65.2.81.97 'cd /home/projects/library && git pull origin main'
