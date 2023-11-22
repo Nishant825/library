@@ -15,6 +15,7 @@ jobs:
 
     - name: Set up SSH password
       run: |
+          mkdir -p ~/.ssh/
           echo "123456" > ~/.ssh/password
           chmod 600 ~/.ssh/password
           export SSHPASS=$(cat ~/.ssh/password)
