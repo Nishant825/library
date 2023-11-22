@@ -16,6 +16,6 @@ jobs:
     - name: Set up SSH password and Deploy to Server
       run: |
           export SSHPASS="123456"
-          sshpass -e ssh -o StrictHostKeyChecking=no ubuntu@65.2.81.97 'git config --global --add safe.directory /home/projects/library && cd /home/projects/library && git pull origin main'
+          sshpass -e ssh -o StrictHostKeyChecking=no ubuntu@65.2.81.97 'git config --global --add safe.directory /home/projects/library && cd /home/projects/library && chmod -R u+rwX .git && git pull origin main'
          
         
