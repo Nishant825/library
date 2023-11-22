@@ -1,8 +1,6 @@
 {% extends 'base.html' %} 
 {% load static %}
-{% block urlBookActive %}
-active
-{% endblock urlBookActive %} 
+{% block urlBookHistoryActive %}active{% endblock urlBookHistoryActive %} 
 {% block content %}
 {% load humanize %}
 <!-- {% load custom_filters %} -->
@@ -14,7 +12,9 @@ active
     <th>Book</th>
     <th>Due Date</th>
     <th>Name</th>
-    <th>Returned</th>
+    <th>Fine(Rs.)</th>
+    <th>Paid</th>
+
   </tr>
   {% for book in books %}
   <tr id= "{{book.id}}" class="book_data">
@@ -22,7 +22,8 @@ active
     <td id={{book.book.id}}>{{book.book.title}}</td>
     <td class="date-style" id="due_date">{{book.due_date | date:"d-m-Y"}}</td>
     <td id={{book.user.id}}>{{book.format_name}}</td>
-    <td><input class="return-btn"  data-id="{{book.id}}" type="button" value="Yes"></td>
+    <td id="fine_val">{{book.calculate_fine}}</td>
+    <td><input data-id={{book.id}} class="Checkbox" type="checkbox" {% if book.paid%}checked{%endif%}></td>
   </tr>
   {% endfor %}
 </table>

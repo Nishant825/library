@@ -14,9 +14,9 @@ th, td {
     text-align: center;
 }
 
-.green-text{
+/* .green-text{
     background-color: green;
-}
+} */
 
 .red-text{
     background-color: #dd4343;
@@ -51,9 +51,17 @@ td img{
 }
 
 td .return-btn {
+    height: 30px;
+    border-radius: 8px;
+    background-color: grey;
     white-space: nowrap; 
     text-align: center;
+    border: none;
     width: 100px;
+}
+
+td .return-btn:hover{
+    background-color: green;
 }
 
 /* Reset default browser styling for select elements
@@ -96,23 +104,9 @@ input[type="checkbox"] {
 }  */
 
 
-td input[type="button"]{
-        color: white;
-        /* background-color: #dd4343; */
-        text-decoration: none;
-        letter-spacing: 3px;
-        font-weight: bold;
-        font-size: 14px;
-        margin: 2px;
-        border: none;
-        padding: 8px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        margin-top: inherit;
+td input[type="checkbox"]{
+        width: 20px;
+        height: 20px;
 }
 
 .disable_text{

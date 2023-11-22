@@ -39,21 +39,39 @@ class BookBorrow(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     due_date = models.DateField(null=True)
-    return_date = models.DateField(null=True, blank=True)
-    fine = models.PositiveIntegerField(null=True, blank=True)
     
-    def format_name(self):
-        return f"{self.user.first_name.capitalize()} {self.user.last_name.capitalize()}"
     class Meta:
        ordering = ['-id']
     
-    def calculate_due_date(self):
-        current_date = date.today()
+    def format_name(self):
+        return f"{self.user.first_name.capitalize()} {self.user.last_name.capitalize()}"
+
+    def __str__(self):
+        return self.book.title
+
+
+class BookBorrowHistory(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    due_date = models.DateField(null=True)
+    fine = models.PositiveIntegerField(default=0)
+    return_date = models.DateField(auto_now_add=True)
+    paid = models.BooleanField(default=False)
+
+    class Meta:
+       ordering = ['-id']
+    
+    def format_name(self):
+        return f"{self.user.first_name.capitalize()} {self.user.last_name.capitalize()}"
+
+    def calculate_fine(self):
+        charges = (self.due_date - self.return_date).days
         if self.due_date:
-            charges = (self.due_date - current_date).days
             if charges<0:
-                return abs(charges)*20
-        return 0
+                charges = abs(charges)*20
+            else:
+                charges = 0
+            return charges
 
     def __str__(self):
         return self.book.title
