@@ -103,11 +103,8 @@
             if (findsearch.length > 0) {
 
               for (let i = 0; i < findsearch.length; i++) {
-                  console.log(findsearch[0].first_name,"----");
-
                 html += `<li class="bg-light list_li_type" id="${findsearch[i].id}" data-value="${findsearch[i]}"
-                  data-desc="${findsearch[i]}"
-                  style="cursor:pointer;">ID- ${findsearch[0].id} &nbsp;&nbsp; ${findsearch[0].first_name} ${findsearch[0].last_name} </li>`;
+                  data-desc="${findsearch[i]}">ID- ${findsearch[i].id} &nbsp;&nbsp; ${findsearch[i].first_name} ${findsearch[i].last_name} </li>`;
               }
               $("#suggestions").html(html);
               $("#suggestions").css("display", "block");

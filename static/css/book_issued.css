@@ -1,4 +1,9 @@
 /* Reset some default browser styling for tables */
+
+*{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -14,16 +19,12 @@ th, td {
     text-align: center;
 }
 
-/* .green-text{
-    background-color: green;
-} */
 
 .red-text{
     background-color: #dd4343;
 }
 
 
-/* Style the header row */
 th {
     font-size: 25px;
     font-family: Arial, Helvetica, sans-serif;
@@ -35,15 +36,12 @@ td {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f2f2f2;
 }
-/* Apply alternating background color to rows */
+
+
 tr:nth-child(even) {
     background-color: azure;
 }
 
-/* Highlight on hover */
-/* tr:hover {
-    background-color: #ddd;
-} */
 
 td img{
     width: 50px;
@@ -63,46 +61,6 @@ td .return-btn {
 td .return-btn:hover{
     background-color: green;
 }
-
-/* Reset default browser styling for select elements
-/* select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: transparent;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 8px;
-    font-size: 16px;
-    width: 85px;
-    text-align: center;
-    background-color: #bf2020;
-    color: white;
-}
-
-/* Style the select container */
-/* .custom-select {
-    border-radius: 4px;
-    background-color: #f2f2f2;
-}
-
-/* Style the select options */
-/* select option {
-    background-color: #fff;
-    color: #333;
-} */
-
-/* Apply styles when the select is focused */
-/* select:focus {
-    outline: none;
-    border-color: #66afe9;
-    box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
-}  */
-/* 
-input[type="checkbox"] {
-    transform: scale(1.2);
-}  */
-
 
 td input[type="checkbox"]{
         width: 20px;
