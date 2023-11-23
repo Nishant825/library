@@ -1,0 +1,23 @@
+name: deploy master to production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  merge-to-main:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH password and Deploy to Server
+      run: |
+          export SSHPASS="123456"
+          git config --global user.email "rnishant2796@gmail.com"
+          git config --global user.name "Nishant825"
+          sshpass -e ssh -o StrictHostKeyChecking=no ubuntu@65.2.81.97 'cd /home/projects/library && sudo git pull origin main'
+         
+        
