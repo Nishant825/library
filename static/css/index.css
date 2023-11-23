@@ -94,7 +94,7 @@ h1 {
   margin-left: 20px;
 }
 
-/* remove button? */
+
 #large-th:target .book {
   height: 390px;
 }
@@ -227,27 +227,20 @@ nav div.avatar {
   margin-right: 20px;
 }
 
-.book-container {
+.book_wrap {
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 25px;
+  margin-top: 60px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 5px;
-}
-
-.book_wrap {
-  width: 50%;
-  height: 453px;
-  margin-top: 80px;
-  display: flex;
-  align-items: flex-start;
+  gap: 180px;
   border-radius: 5px;
   background-color: teal;
 }
 
 .book_wrap form {
   margin-top: 20px;
-  height: 100%;
   margin: 40px;
   flex: 1;
   text-align: center;
@@ -255,27 +248,23 @@ nav div.avatar {
 }
 
 .cover_img {
-  flex: 0 0 300px;
   height: 100%;
-  margin: 0px;
-  border-radius: 5px;
+  margin: 10px;
 }
 
 .form_container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
 .book_wrap form span {
-  margin-top: 10px;
-  height: 100%;
   margin: 0px;
-  flex: 1;
   text-align: center;
   font-family: "Montserrat", sans-serif;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .book_ttl {
@@ -322,8 +311,8 @@ input[type="date"]:focus {
 
 .suggestions {
   position: absolute;
-  top: 157px;
-  width: 293px;
+  top: 172px;
+  width: 335px;
   font-size: 18px;
   background-color: silver;
   left: 18px;
@@ -352,6 +341,7 @@ input[type="date"]:focus {
 }
 
 .cover_img img {
+  border-radius: 10px;
   width: 100%;
   height: 100%;
 }

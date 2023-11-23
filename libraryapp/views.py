@@ -35,7 +35,6 @@ def search_user(request):
 @staff_permission_required
 def assign_book(request,book_id):
     user_list = list(User.objects.all().values("id", "first_name", "last_name"))
-    print(user_list,"00")
     book_obj = Book.objects.get(id=book_id)
     if request.method == "POST":
         title_data = request.POST.get("title_data")
