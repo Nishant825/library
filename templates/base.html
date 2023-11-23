@@ -87,22 +87,27 @@
     {% block content %}{% endblock %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        let book_list_obj = {{ user_list_obj|safe }}
+        var book_list_obj = {{ user_list_obj|safe }}
         $(document).on('keyup', '.list_value', function () {
           let value = $(this).val();
           console.log(book_list_obj);
           if (value.length > 2) {
-            var findsearch = book_list_obj.filter(function(book_list_obj) {
-              return book_list_obj.toLowerCase().includes(value.toLowerCase());
+            var findsearch = book_list_obj.filter(function(book) {
+              return book.first_name.toLowerCase().includes(value.toLowerCase());
             });
+          console.log(findsearch, "OKAY");
+
 
             let html = '';
 
             if (findsearch.length > 0) {
+
               for (let i = 0; i < findsearch.length; i++) {
-                html += `<li class="bg-light list_li_type" id="1" data-value="${findsearch[i]}"
+                  console.log(findsearch[0].first_name,"----");
+
+                html += `<li class="bg-light list_li_type" id="${findsearch[i].id}" data-value="${findsearch[i]}"
                   data-desc="${findsearch[i]}"
-                  style="cursor:pointer;">${findsearch[i]}</li>`;
+                  style="cursor:pointer;">ID- ${findsearch[0].id} &nbsp;&nbsp; ${findsearch[0].first_name} ${findsearch[0].last_name} </li>`;
               }
               $("#suggestions").html(html);
               $("#suggestions").css("display", "block");
@@ -112,11 +117,11 @@
           }
         });
 
-        var input_field_value = [];
         $(document).on('click', '.list_li_type', function () {
-          let value = $(this).text();
-          input_field_value.push(value);
-          $(".list_value").val(input_field_value.join(''));
+          let value = $(this).text().split(' ').slice(2).join(' ').trim();
+          let user_id = $(this).attr('id')
+          $(".list_value").val(value);
+          $("#user_id").val(user_id);
           $("#suggestions").css("display", "none");
         });
 
@@ -124,7 +129,6 @@
         $(document).on('click', '.return-btn', function () {
           var row = $(this).closest('tr');
           issed_book_id = row.attr('id')
-          console.log(issed_book_id,"===========")
           let book_borrow_id = $(this).attr("data-id");
           let rows = $(this).closest('table').find('tr');
           var numberOfRows = rows.length;
