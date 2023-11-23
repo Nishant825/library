@@ -34,13 +34,14 @@ def search_user(request):
 
 @staff_permission_required
 def assign_book(request,book_id):
-    user_list = list(User.objects.all().values_list("username", flat=True))
+    user_list = list(User.objects.all().values("id", "first_name", "last_name"))
+    print(user_list,"00")
     book_obj = Book.objects.get(id=book_id)
     if request.method == "POST":
         title_data = request.POST.get("title_data")
-        username  = request.POST.get("username")
+        user_id  = request.POST.get("user_id")
         due_date = request.POST.get("due_date")
-        user = User.objects.get(username=username)
+        user = User.objects.get(id=user_id)
         book = Book.objects.get(title=title_data)
         book_obj = BookBorrow.objects.create(user=user, due_date=due_date, book=book)
         book_obj.book.availability_status = "no"
@@ -63,7 +64,10 @@ def return_books(request):
     user = User.objects.get(id=user)
     due_date = request.POST.get("due_date", None)
     date_object = datetime.strptime(due_date, "%d-%m-%Y")
+    return_btn_value = request.POST.get("return_btn_value", None)
     if issued_book_obj and book_value and due_date and user:
+        issued_book_obj.book.availability_status = return_btn_value
+        issued_book_obj.book.save()
         issued_book_obj.delete()
         borow_book = BookBorrowHistory.objects.create(book = book_value, due_date=date_object, user=user)
         if borow_book:
