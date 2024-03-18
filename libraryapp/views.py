@@ -11,7 +11,7 @@ from django.core.cache import cache
 @login_required(login_url="login")
 def books(request, filterBy=None):
     if filterBy:
-        books = Book.objects.filter(genre__name__icontains=filterBy)
+        books = Book.objects.filter(genre__name=filterBy)
     elif 'books' in cache:
         books = cache.get("books")
     else:
