@@ -8,7 +8,7 @@ from accounts.permissions import staff_permission_required
 from datetime import datetime
 from django.core.cache import cache
 
-@login_required(login_url="login")
+@login_required(login_url="customchangeto check")
 def books(request, filterBy=None):
     if filterBy:
         books = Book.objects.filter(genre__name__icontains=filterBy)
